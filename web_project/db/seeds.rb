@@ -25,3 +25,9 @@ OrderStatus.create! id: 1, name: "In Progress"
 OrderStatus.create! id: 2, name: "Placed"
 OrderStatus.create! id: 3, name: "Shipped"
 OrderStatus.create! id: 4, name: "Cancelled"
+
+ProductStatus.delete_all
+ProductStatus.create! id: 1, name: "On Sale"
+ProductStatus.create! id: 2, name: "New"
+ProductStatus.create! id: 3, name: "Recently Updated"
+ProductStatus.create! id: 4, name: "Sold Out"
