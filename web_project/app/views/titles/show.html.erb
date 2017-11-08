@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @title.body %>
+</p>
+
+<p>
+  <strong>Published at:</strong>
+  <%= @title.published_at %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @title.user %>
+</p>
+
+<%= link_to 'Edit', edit_title_path(@title) %> |
+<%= link_to 'Back', titles_path %>
