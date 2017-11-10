@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :categories
   get 'order_items/create'
 
   get 'order_items/update'
@@ -8,6 +9,8 @@ Rails.application.routes.draw do
   get 'carts/show'
 
   get 'products/index'
+
+  get 'search_results' => 'product#search_results', as: 'search_results'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
