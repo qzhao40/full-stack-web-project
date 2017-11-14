@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
   end
 
   def search_results
-    @products = Product.all
+    wildcard_keywords = '%' + param[:search_keywords] + '%'
+    @products = Product.where("name LIKE ?", wildcard_keywords)
   end
 end
