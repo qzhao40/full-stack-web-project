@@ -4,10 +4,10 @@
   <%Category.find(params[:id]).products.order(created_at: :desc).each do |item| %>
 
   <div class = "product_item">
-    <h2><span class="bold">Name: </span> <%= product.name %></h2>
-    <p><span class="bold">Price: </span><%= number_to_currency product.price %></p>
-    <p><%= image_tag (product.image_filename).to_s , hight:"160",width:"260" %></p>
-    <p><span class="bold">Created At: </span><%= product.created_at%></p>
+    <h2><span class="bold">Name: </span> <%= @product.name %></h2>
+    <p><span class="bold">Price: </span><%= number_to_currency @product.price %></p>
+    <p><%= image_tag (@product.image_filename).to_s , hight:"160",width:"260" %></p>
+    <p><span class="bold">Created At: </span><%= @product.created_at%></p>
   </div>
   <%end%>
 

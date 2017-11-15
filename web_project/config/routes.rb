@@ -10,7 +10,11 @@ Rails.application.routes.draw do
 
   get 'products/index'
 
-  get 'search_results' => 'product#search_results', as: 'search_results'
+  get 'search' => 'products#search', as: 'search'
+
+  get 'search_results' => 'products#search_results', as: 'search_results'
+
+
 
 
 

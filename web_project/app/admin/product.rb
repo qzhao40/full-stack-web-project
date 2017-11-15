@@ -11,5 +11,15 @@ ActiveAdmin.register Product do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
+form :html => { :multipart => true} do |f|
+      f.inputs "Product" do
+        f.input :category
+        f.input :name
+        f.input :price
+        f.input :image_filename, :as => :file
+        f.input :description, :as => :text
+      end
+      f.actions
+    end
 
 end

@@ -6,5 +6,5 @@ class Product < ActiveRecord::Base
   has_many :product_status
 
   default_scope { where(active: true) }
-  
+  mount_uploader :image_filename, ImageUploader
 end

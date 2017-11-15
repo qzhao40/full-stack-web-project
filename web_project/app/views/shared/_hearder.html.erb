@@ -2,11 +2,11 @@
   <nav>
     <%= link_to 'View In Categories', categories_path %>
     <%= link_to 'View All Proucts', products_path %>
-    <%= link_to 'About Us'%>
-    <%= link_to 'Contact Us'%>
+    <a href="about.html.erb">About Us</a>
+    <a href="contact.html.erb">Contact Us</a>
   </nav>
 <br>
-    <%= form_tag 'search_results_path', method: :get do %>
+    <%= form_tag 'products_search_results_path', method: :get do %>
     <%= text_field_tag :search_keywords %>
     <%= submit_tag 'Search' %>
     <% end %>
