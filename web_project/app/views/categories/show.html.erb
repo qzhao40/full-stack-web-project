@@ -7,7 +7,7 @@
 <p>
   <strong>Associated Proucts: </strong>
   <% @category.products.each do |product| %>
-
+    <%= link_to product.name, product %>
   <% end %>
 </p>
 <%= link_to 'Edit', edit_category_path(@category) %> |

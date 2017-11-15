@@ -6,11 +6,11 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(pram[:id])
+    @product = Product.find(params[:id])
   end
 
   def search_results
-    wildcard_keywords = '%' + param[:search_keywords] + '%'
+    wildcard_keywords = '%' + params[:search_keywords] + '%'
     @products = Product.where("name LIKE ?", wildcard_keywords)
   end
 end
