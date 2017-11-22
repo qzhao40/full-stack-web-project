@@ -57,5 +57,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'activeadmin', '~> 1.1.0.pre4'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'devise'
+# Gem for pagination
 gem 'kaminari'
 gem 'carrierwave', '~> 1.0'
