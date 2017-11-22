@@ -10,12 +10,11 @@ Rails.application.routes.draw do
 
   get 'products/index'
 
-  get 'search' => 'products#search', as: 'search'
+  get 'search/search_result'
 
-  get 'search_results' => 'products#search_results', as: 'search_results'
-
-
-
+  get 'search/search_show'
+  get '/cart/add_to_cart_success', to: 'cart#add_to_cart_success'
+    get '/cart/cart', to: 'cart#cart'
 
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -25,7 +24,10 @@ Rails.application.routes.draw do
   resources :users
   resources :products, only: [:index,:show]
   resource :cart, only: [:show]
-  resources :order_items, only: [:create, :update, :destroy]
+  resources :order_items, only: [:create, :update, :destroy], defaults: { format: 'js' }
   resources :users, only: [:show, :edit, :update]
+
   root to: "products#index"
+
+
 end

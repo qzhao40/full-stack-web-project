@@ -1,13 +1,5 @@
-<header>
-  <nav>
-    <%= link_to 'View In Categories', categories_path %>
-    <%= link_to 'View All Proucts', products_path %>
-    <a href="/about">About Us</a>
-    <a href="/contact">Contact Us</a>
-  </nav>
-<br>
 <div class = "search_box">
-  <!-- <p><%=link_to "My Shopping Cart", "/cart/cart" %></p> -->
+  <p><%=link_to "My Shopping Cart", "/cart/cart" %></p>
   <%= form_tag(search_search_result_path, :method => "get", id: "search_form") do %>
       <%= text_field_tag :search, params[:search], placeholder: "Search", required:true %>
         <% cat_array = ["Overall"]%>
@@ -17,4 +9,3 @@
       <%= submit_tag "Search", :name => nil %>
   <% end %>
 </div>
-</header>

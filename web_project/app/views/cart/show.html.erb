@@ -1,0 +1,16 @@
+<%session[:items_in_cart].each do |id, quantity|%>
+
+  <div class="cart_item">
+
+    <% item = Product.find(id.to_i)%>
+    <h2><span class="bold">Name: </span> <%= item.name%></h2>
+    <p><span class="bold">Price: </span><%= number_to_currency item.price %></p>
+    <p><%= image_tag (item.image_filename).to_s , hight:"160",width:"260" %></p>
+    <p>Quantity: 1</p>
+       <% price = quantity * item.price%>
+    <h3><span class="bold">Item subtotal: </span> <%= number_to_currency price %></h3>
+    <%subtotal += price%>
+    <p class="button"><%=link_to "Details", "/products/#{item.id}" %></p>
+    <p class="button"><%=link_to "Remove", "/remove_cart/remove_cart/#{item.id}" %></p>
+  </div>
+<%end%>
