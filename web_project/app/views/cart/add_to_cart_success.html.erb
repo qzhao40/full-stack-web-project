@@ -1,0 +1,17 @@
+
+
+
+<div class="content">
+  <%= render "header"%>
+  <h1>Shopping Cart</h1>
+    <div class = "cart">
+
+        <%= render "/category/cat_index"%>
+        <%= render "/search/search_box"%>
+        <div class="clear_box">
+        <h1>Success</h1>
+          <p><%=link_to "Go back to continue shopping", :back %></p>
+          <p><%=link_to "Go to shopping cart", cart_cart_path %></p>
+       </div>
+    </div>
+</div>

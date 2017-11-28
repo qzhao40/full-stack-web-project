@@ -1,0 +1,39 @@
+
+
+
+
+
+
+
+<div class="content">
+
+  <h1>Shopping Cart</h1>
+    <div class = "cart">
+
+        <div class="clear_box">
+          <h1>Order Placed</h1>
+          <p>Thank you for ordering! Please finish the payment process.</p>
+
+          <%= form_tag charges_path do %>
+            <article>
+              <% if flash[:error].present? %>
+                <div id="error_explanation">
+                  <p><%= flash[:error] %></p>
+                </div>
+              <% end %>
+              <label class="amount">
+                <span>Amount: <%= number_to_currency session[:total_price]%></span>
+              </label>
+            </article>
+
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                    data-description="Pay for the order"
+                    data-amount= "<%= session[:total_price].to_f * 100 %>"
+                    data-locale="en"
+                    data-currency="cad"></script>
+          <% end %>
+
+          <p><%= link_to 'Cancel', root_path %></p>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="content">
+  <%= render "/layouts/header"%>
+<div class = "category">
+  <h1>Category: <%=Category.find(params[:id]).name%></h1>
+<%= render "/category/cat_index"%>
+<%= render "/search/search_box"%>
+<% if flash[:notice] %>
+  <div class="flash">
+  <div class="message"><%= flash[:notice]%></div>
+  <div class="btn"><%= button_to 'Dismiss', "/cat_show/#{params[:id]}", :method => :get %></div>
+
+  </div>
+<% end %>
+<div class="product_block">
+
+  <%Category.find(params[:id]).products.order(created_at: :desc).each do |item| %>
+  <div class = "product_item">
+    <h2><span class="bold">Name: </span> <%= item.name%></h2>
+    <p><span class="bold">Price: </span><%= number_to_currency item.price %></p>
+    <p><%= image_tag(item.image, :alt => item.name) %></p>
+    <p><span class="bold">Created At: </span><%= item.created_at%></p>
+    <p class="button"><%=link_to "Details", "/product_items/#{item.id}" %></p>
+    <p class="button"><%=link_to "Add to Cart", add_to_cart_flower_item_path(item), method: :post %></p>
+  </div>
+  <%end%>
+
+
+</div>
+</div>
+
+<p class= "footer_home"><%= link_to 'Home', root_path %></p>
+</div>

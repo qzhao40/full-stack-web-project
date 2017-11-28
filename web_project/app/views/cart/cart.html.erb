@@ -1,0 +1,44 @@
+<div class="content">
+  <%= debug session[:items_in_cart] %>
+  <h1>Shopping Cart</h1>
+    <div class = "cart">
+
+
+        <div class="product_block">
+
+          <% if flash[:notice] %>
+            <div class="flash">
+            <div class="message"><%= flash[:notice]%></div>
+            <div class="btn"><%= button_to 'Dismiss', "/cart/cart", :method => :get %></div>
+
+            </div>
+          <% end %>
+
+          <% subtotal = 0.0 %>
+            <%session[:items_in_cart].each do |id, quantity|%>
+
+              <div class="product_item">
+
+                <% item = Product.find(id.to_i)%>
+                <h2><span class="bold">Name: </span> <%= item.name%></h2>
+                <p><span class="bold">Price: </span><%= number_to_currency item.price %></p>
+                <p><%= image_tag(item.image_filename, :alt => item.name , hight:"160",width:"260") %></p>
+                 <%= form_tag(cart_cart_path, :method => "get", id: "save_quantity_form") do %>
+                     <%= hidden_field_tag :id, id %>
+                     <p>Quantity: <%= number_field_tag :quantity, quantity, min: 1, required:true %></p>
+                     <%= submit_tag "Save Quantity", :name => nil %>
+                   <% end %>
+                   <% price = quantity * item.price%>
+                <h3><span class="bold">Item subtotal: </span> <%= number_to_currency price %></h3>
+                <%subtotal += price%>
+                <p class="button"><%=link_to "Details", "/products/#{item.id}" %></p>
+                <p class="button"><%=link_to "Remove", "/remove_cart/remove_cart/#{item.id}" %></p>
+              </div>
+            <%end%>
+            <div class = "checkout_block">
+              <h3><span class="bold">Subtotal: </span> <%= number_to_currency subtotal %></h3>
+              <p class="checkout_button"><%=link_to "Checkout", checkout_checkout_path %></p>
+            <div>
+        </div>
+    </div>
+</div>

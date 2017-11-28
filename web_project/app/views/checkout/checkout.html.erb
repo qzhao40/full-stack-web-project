@@ -1,0 +1,52 @@
+<div class="content">
+
+  <h1> Checkout</h1>
+
+  <div class="checkout_area">
+     <%= render "customer_info"%>
+     <br>
+     <br>
+     <br>
+
+    <div class="order_info">
+      <h2>Order information</h2>
+    <% subtotal = 0.0 %>
+      <%session[:items_in_cart].each do |id, quantity|%>
+
+        <div class="order_item">
+          <% item = Product.find(id.to_i)%>
+          <p><span class="bold">Name: </span> <%= item.name%></p>
+          <p><span class="bold">Price: </span><%= number_to_currency item.price %></p>
+
+               <p>Quantity: <%=  quantity %></p>
+
+             <% price = quantity * item.price%>
+          <h3><span class="bold">Item subtotal: </span> <%= number_to_currency price %></h3>
+          <%subtotal += price%>
+        </div>
+      <%end%>
+      <div class = "checkout_block">
+        <%if session[:customer_info] != nil%>
+        <br>
+        <br>
+        <br>
+          <h3><span class="bold">Subtotal: </span> <%= number_to_currency subtotal %></h3>
+          <%if session[:customer_info]["location_id"] != nil%>
+              <% location_id = session[:customer_info]["location_id"]%>
+          <%else%>
+                <% location_id = session[:customer_info][:location_id]%>
+          <%end%>
+          <%tax_rate = Location.find(location_id).tax_rate%>
+          <p><span class="bold">Tax rate: </span> <%= tax_rate *100 %>%</p>
+          <p><span class="bold">Tax: </span> <%= number_to_currency subtotal * tax_rate %></p>
+          <% total = subtotal * (1+tax_rate) %>
+          <% session[:total_price] = total%>
+          <p><span class="bold">Total Price: </span> <%= number_to_currency total %></p>
+          <p class="checkout_button"><%=link_to "Place Order", placeorder_placeorder_path %></p>
+       <% else %>
+          <h2>Please enter your information for full order details. </h2>
+       <%end%>
+     </div>
+  </div>
+</div>
+</div>

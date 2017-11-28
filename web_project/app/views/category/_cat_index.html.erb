@@ -1,0 +1,8 @@
+<div class = "menu">
+    <ul>
+        <li><%= link_to 'Home', root_path %></li>
+        <% Category.all.each do |cat| %>
+        <p class="footer_home"><li><%=link_to cat.name, "/cat_show/#{cat.id}" %></li></p>
+          <% end %>
+    </ul>
+</div>

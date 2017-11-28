@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115170757) do
+ActiveRecord::Schema.define(version: 20171128034417) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -50,6 +50,38 @@ ActiveRecord::Schema.define(version: 20171115170757) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "customers", force: :cascade do |t|
+    t.string "name"
+    t.text "address"
+    t.string "city"
+    t.string "country"
+    t.string "postalCode"
+    t.string "email"
+    t.integer "location_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "password"
+    t.index ["location_id"], name: "index_customers_on_location_id"
+  end
+
+  create_table "line_items", force: :cascade do |t|
+    t.integer "quantity"
+    t.decimal "price"
+    t.integer "product_id"
+    t.integer "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_line_items_on_order_id"
+    t.index ["product_id"], name: "index_line_items_on_product_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "name"
+    t.decimal "tax_rate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "order_items", force: :cascade do |t|
     t.integer "product_id"
     t.integer "order_id"
@@ -73,10 +105,13 @@ ActiveRecord::Schema.define(version: 20171115170757) do
     t.decimal "tax", precision: 12, scale: 3
     t.decimal "shipping", precision: 12, scale: 3
     t.decimal "total", precision: 12, scale: 3
-    t.integer "order_status_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["order_status_id"], name: "index_orders_on_order_status_id"
+    t.integer "customer_id"
+    t.integer "status_id"
+    t.string "customer_stripe_id"
+    t.string "charge_stripe_id"
+    t.string "payment_amount"
   end
 
   create_table "product_statuses", force: :cascade do |t|
@@ -95,6 +130,13 @@ ActiveRecord::Schema.define(version: 20171115170757) do
     t.string "image_filename"
     t.integer "category_id"
     t.index ["category_id"], name: "index_products_on_category_id"
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
   end
 
   create_table "titles", force: :cascade do |t|
