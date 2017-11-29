@@ -1,25 +1,12 @@
 <div class="content">
-  <%= debug session[:items_in_cart] %>
-  <% if flash[:notice] %>
-    <div class="flash">
-    <div class="message"><%= flash[:notice]%></div>
-    <div class="btn"><%= button_to 'Dismiss', "/cart/cart", :method => :get %></div>
 
-    </div>
-  <% end %>
   <h1>Shopping Cart</h1>
     <div class = "cart">
 
 
         <div class="product_block">
 
-          <% if flash[:notice] %>
-            <div class="flash">
-            <div class="message"><%= flash[:notice]%></div>
-            <div class="btn"><%= button_to 'Dismiss', "/cart/cart", :method => :get %></div>
 
-            </div>
-          <% end %>
 
           <% subtotal = 0.0 %>
             <%session[:items_in_cart].each do |id, quantity|%>
