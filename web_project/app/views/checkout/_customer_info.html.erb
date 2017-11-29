@@ -12,7 +12,7 @@
               <p>Postal Code: </p><p><%= text_field_tag :postcode, params[:postcode], required:true %></p>
               Please set a password so that the information can be remembered for future use:
               <p>Password: </p><p><%= password_field_tag :password, params[:password], required:true%></p>
-            <%= submit_tag "Submit", :name => nil %>
+            <%= submit_tag "Submit Information", :name => nil %>
               <p>Have ordered from us before? Click here to <%=link_to "Sign in", signin_signin_path %></p>
         <% end %>
 
@@ -26,10 +26,7 @@
      <% session[:customer_info][:password] = params[:password] %>
      You have saved your information.
      <div>
-       <!-- <div>
-          <%= debug session[:customer_info]%>
 
-       </div> -->
         <p>Name: <%=session[:customer_info][:name]%></p>
         <p>Email: <%=session[:customer_info][:email]%></p>
         <p>Address: <%=session[:customer_info][:address]%></p>
