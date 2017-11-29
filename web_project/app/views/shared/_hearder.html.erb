@@ -1,12 +1,11 @@
 <header>
   <nav>
+    <h3><%=link_to "View My Shopping Cart", "/cart/cart" %></h3>
     <%= link_to 'View In Categories', categories_path %>
     <%= link_to 'View All Proucts', products_path %>
-    <a href="/about">About Us</a>
-    <a href="/contact">Contact Us</a>
+
   </nav>
-  <br>
-  <p><%=link_to "View My Shopping Cart", "/cart/cart" %></p>
+
 <div class = "search_box">
 
   <%= form_tag(search_search_result_path, :method => "get", id: "search_form") do %>
