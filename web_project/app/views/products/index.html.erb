@@ -1,4 +1,11 @@
 <h2 class="text-center">Products for Sale</h2>
+<% if flash[:notice] %>
+  <div class="flash">
+  <div class="message alert alert-success" ><%= flash[:notice]%><div class="btn"><%= button_to 'Dismiss', "/products/index", :method => :get %></div></div>
+
+
+  </div>
+<% end %>
 <div class="row">
   <div class="col-xs-6 col-xs-offset-3">
     <% @products.each do |product| %>
