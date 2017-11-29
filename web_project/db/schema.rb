@@ -12,13 +12,16 @@
 
 ActiveRecord::Schema.define(version: 20171129004445) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
-    t.integer "resource_id"
+    t.bigint "resource_id"
     t.string "author_type"
-    t.integer "author_id"
+    t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
@@ -44,13 +47,9 @@ ActiveRecord::Schema.define(version: 20171129004445) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string "name"
-    t.text "desc"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
-  create_table "customers", force: :cascade do |t|
+  create_table "customers", id: :serial, force: :cascade do |t|
     t.string "name"
     t.text "address"
     t.string "city"
@@ -63,7 +62,7 @@ ActiveRecord::Schema.define(version: 20171129004445) do
     t.index ["location_id"], name: "index_customers_on_location_id"
   end
 
-  create_table "line_items", force: :cascade do |t|
+  create_table "line_items", id: :serial, force: :cascade do |t|
     t.integer "quantity"
     t.decimal "price"
     t.integer "product_id"
@@ -74,7 +73,7 @@ ActiveRecord::Schema.define(version: 20171129004445) do
     t.index ["product_id"], name: "index_line_items_on_product_id"
   end
 
-  create_table "locations", force: :cascade do |t|
+  create_table "locations", id: :serial, force: :cascade do |t|
     t.string "name"
     t.decimal "tax_rate"
     t.datetime "created_at", null: false
@@ -82,8 +81,8 @@ ActiveRecord::Schema.define(version: 20171129004445) do
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.integer "product_id"
-    t.integer "order_id"
+    t.bigint "product_id"
+    t.bigint "order_id"
     t.decimal "unit_price", precision: 12, scale: 3
     t.integer "quantity"
     t.decimal "total_price", precision: 12, scale: 3
@@ -125,13 +124,12 @@ ActiveRecord::Schema.define(version: 20171129004445) do
     t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "description"
     t.string "image_filename"
-    t.integer "category_id"
+    t.bigint "category_id"
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
-  create_table "statuses", force: :cascade do |t|
+  create_table "statuses", id: :serial, force: :cascade do |t|
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -141,7 +139,7 @@ ActiveRecord::Schema.define(version: 20171129004445) do
   create_table "titles", force: :cascade do |t|
     t.text "body"
     t.datetime "published_at"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_titles_on_user_id"
@@ -154,4 +152,11 @@ ActiveRecord::Schema.define(version: 20171129004445) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "customers", "locations"
+  add_foreign_key "line_items", "orders"
+  add_foreign_key "line_items", "products"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
+  add_foreign_key "products", "categories"
+  add_foreign_key "titles", "users"
 end
